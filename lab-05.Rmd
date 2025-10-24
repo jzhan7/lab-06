@@ -106,7 +106,11 @@ unique(staff_long$faculty_type)
 ```{r dot-plot}
 # Write your code for Exercise 3 here
 
-
+ggplot(data = staff_long,
+       mapping = aes(x = year, 
+                     y = percent, 
+                     colour = faculty_type)) +
+  geom_point()
 
 ```
 
@@ -115,7 +119,11 @@ unique(staff_long$faculty_type)
 ```{r bad-line-plot}
 # Write your code for Exercise 4 here
 
-
+ggplot(data = staff_long,
+       mapping = aes(x = year, 
+                     y = percent, 
+                     colour = faculty_type)) +
+  geom_line()
 
 ```
 
@@ -124,14 +132,18 @@ unique(staff_long$faculty_type)
 ```{r mutate-year}
 ## Uncomment and complete the following code
 
-#staff_long <- staff_long %>%
-#  mutate(year = ______(year))
+staff_long <- staff_long %>%
+  mutate(year = as.numeric(year))
 ```
 
 
 ```{r working-line-plot}
 # Write your code for Exercise 5 here
-
+ggplot(data = staff_long,
+       mapping = aes(x = year, 
+                     y = percent, 
+                     colour = faculty_type)) +
+  geom_line()
 
 
 ```
@@ -141,7 +153,15 @@ unique(staff_long$faculty_type)
 ```{r better-line-plot}
 # Write your code for Exercise 6 here
 
-
+ggplot(data = staff_long,
+       mapping = aes(x = year, 
+                     y = percent, 
+                     colour = faculty_type)) +
+  geom_line() +
+  labs(title = "Percentage of Staff Over Time by Faculty Type (1975-2011)",
+              x = "Year",
+              y = "Percentage of Staff",
+              color = "Faculty")
 
 
 ```
@@ -150,9 +170,9 @@ unique(staff_long$faculty_type)
 
 _Write below your ideas for adapting the line plot_
 
-* Idea 1
-* Idea 2
-* Idea 3
+* Idea 1 Change title to emphasise PT
+* Idea 2 PT different colour from rest, which should all be one colour
+* Idea 3 PT line made bolder
 * ...
 
 
@@ -160,8 +180,23 @@ _Write below your ideas for adapting the line plot_
 
 ```{r implement-Ex7}
 # Write your code for Exercise 8 here
-
-
-
+ggplot(data = staff_long,
+       mapping = aes(x = year, 
+                     y = percent, 
+                     colour = faculty_type)) +
+  geom_line() +
+  labs(title = "Growth of Part-time Over Time compared to other Faculty Types (1975-2011)",
+              x = "Year",
+              y = "Percentage of Staff",
+              color = "Faculty") +
+  scale_color_manual(
+    values = c(
+      "Part-Time Faculty" = "red",
+      "Full-Time Tenured Faculty" = "gray70",
+      "Full-Time Tenure-Track Faculty" = "gray70",
+      "Full-Time Non-Tenure-Track Faculty" = "gray70",
+      "Graduate Student Employees" = "gray70"
+    ))
+#Title was changed to highlight the objective, the colour of pt faculty was changed to a vivid red while the others all changed to grey to emphasise the objective. This is opposed to the original vague title and different colours representing each faculty.
 ```
 
